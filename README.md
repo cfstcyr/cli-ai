@@ -1,6 +1,6 @@
 # cli-ai
 
-CLI application that uses OpenAI to answer to prompts
+CLI application that uses OpenAI ChatGPT to answer to prompts
 
 ## Usage
 
@@ -29,3 +29,4 @@ This mode generates a CLI command from a prompt. You can then run this command o
 5. Add `./bin` to you path.
     - With `zsh`: `echo '\n# cli-ai\nexport PATH="$PATH:<path-to-this-directory>/bin"' >> ~/.zshrc`
     - With `bash`: `echo '\n# cli-ai\nexport PATH="$PATH:<path-to-this-directory>/bin"' >> ~/.bashrc`
+6. Add your OpenAI API key with `ai config set api-key <my api key>`

@@ -6,6 +6,7 @@ import ora from 'ora';
 import { OpenMenu } from '../utils/menu';
 import { copy } from '../utils/clipboard';
 import { exec } from '../utils/exec';
+import { config } from '../utils/config';
 
 export const cli = async (prompt: string) => {
     const openai = getOpenai();
@@ -16,18 +17,19 @@ export const cli = async (prompt: string) => {
 
     try {
         const response = (
-            await openai.createCompletion({
-                model: 'text-davinci-003',
-                prompt: `Convert this text to a CLI command: 
-                Desired format: command only            
-                prompt: """${prompt}"""`,
+            await openai.createChatCompletion({
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    { role: 'system', content: 'You are a CLI command generator' },
+                    { role: 'user', content: `Imagine you are ${config.get('system') ?? 'macos'} terminal commands selector. I will describe task and you will respond only using linux command, without description, without explanation.: """${prompt}"""` }
+                ],
                 temperature: 0,
                 max_tokens: 100,
                 top_p: 1.0,
                 frequency_penalty: 0.2,
                 presence_penalty: 0.0,
             })
-        ).data.choices[0]?.text?.trim();
+        ).data.choices[0]?.message?.content?.trim();
 
         spinner.stop();
 

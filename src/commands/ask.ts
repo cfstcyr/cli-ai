@@ -12,12 +12,15 @@ export const ask = async (prompt: string) => {
 
     try {
         const response = (
-            await openai.createCompletion({
-                model: 'text-davinci-003',
+            await openai.createChatCompletion({
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    { role: 'system', content: 'You are an helpful assistant' },
+                    { role: 'user', content: prompt },
+                ],
                 max_tokens: 100,
-                prompt,
             })
-        ).data.choices[0]?.text?.trim();
+        ).data.choices[0]?.message?.content.trim();
 
         spinner.stop();
 

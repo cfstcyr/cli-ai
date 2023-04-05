@@ -3,4 +3,5 @@ export const CONFIG_FILENAME = 'config.json';
 
 export const CONFIG_KEYS = {
     apiKey: 'api-key',
+    system: 'system',
 };
