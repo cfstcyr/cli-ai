@@ -1,1 +1,31 @@
 # cli-ai
+
+CLI application that uses OpenAI to answer to prompts
+
+## Usage
+
+### Ask AI
+
+This mode allows you to ask a question.
+
+![Ask AI](./assets/example1.png)
+
+### Generate CLI command
+
+This mode generates a CLI command from a prompt. You can then run this command or copy it to the clipboard.
+
+![Generate CLI command](./assets/example2.png)
+
+## Installation
+
+### Manual
+
+1. Clone this repo
+2. Install dependencies `npm ci`
+3. Build the project `npm run build`
+4. Package the project
+    - This app has only been tested on a M2 Mac and the command only exists for this architecture. `npm run package:macos`
+    - If you don't have a Mac, you might need to checkout the [pkg](https://www.npmjs.com/package/pkg) documentation.
+5. Add `./bin` to you path.
+    - With `zsh`: `echo '\n# cli-ai\nexport PATH="$PATH:<path-to-this-directory>/bin"' >> ~/.zshrc`
+    - With `bash`: `echo '\n# cli-ai\nexport PATH="$PATH:<path-to-this-directory>/bin"' >> ~/.bashrc`
