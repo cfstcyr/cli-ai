@@ -27,6 +27,6 @@ This mode generates a CLI command from a prompt. You can then run this command o
     - This app has only been tested on a M2 Mac and the command only exists for this architecture. `npm run package:macos`
     - If you don't have a Mac, you might need to checkout the [pkg](https://www.npmjs.com/package/pkg) documentation.
 5. Add `./bin` to you path.
-    - With `zsh`: `echo '\n# cli-ai\nexport PATH="$PATH:<path-to-this-directory>/bin"' >> ~/.zshrc`
-    - With `bash`: `echo '\n# cli-ai\nexport PATH="$PATH:<path-to-this-directory>/bin"' >> ~/.bashrc`
+    - With `zsh` from this directory: `echo "\n# cli-ai\nexport PATH=\"\$PATH:$PWD/bin\"" >> ~/.zshrc`
+    - With `bash` from this directory: `echo "\n# cli-ai\nexport PATH=\"\$PATH:$PWD/bin\"" >> ~/.bashrc`
 6. Add your OpenAI API key with `ai config set api-key <my api key>`
