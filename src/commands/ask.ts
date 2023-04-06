@@ -28,7 +28,7 @@ export const ask = async (prompt: string) => {
         spinner.stop();
 
         if (response) {
-            console.log(wrap(response, { width: process.stdout.columns }));
+            console.log(wrap(response, { width: process.stdout.columns - 5 }));
         } else {
             autoBox(chalk.red('No response'));
         }
