@@ -21,7 +21,7 @@ export const cli = async (prompt: string) => {
                 model: 'gpt-3.5-turbo',
                 messages: [
                     { role: 'system', content: 'You are a CLI command generator' },
-                    { role: 'user', content: `Imagine you are ${config.get('system') ?? 'macos'} terminal commands selector. I will describe task and you will respond only using linux command, without description, without explanation.: """${prompt}"""` }
+                    { role: 'user', content: `Imagine you are ${config.get('system') ?? 'macos'} terminal commands selector. I will describe task and you will respond only using linux command, without description, without explanation, without quotation.: """${prompt}"""` }
                 ],
                 temperature: 0,
                 max_tokens: 100,
