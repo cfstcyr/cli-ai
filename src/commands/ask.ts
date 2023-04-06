@@ -4,6 +4,7 @@ import { getOpenai } from '../utils/openai';
 import ora from 'ora';
 import { config } from '../utils/config';
 import { CONFIG_KEYS } from '../constants/config';
+import wrap from 'word-wrap';
 
 export const ask = async (prompt: string) => {
     const openai = getOpenai();
@@ -27,7 +28,7 @@ export const ask = async (prompt: string) => {
         spinner.stop();
 
         if (response) {
-            console.log(response);
+            console.log(wrap(response, { width: process.stdout.columns }));
         } else {
             autoBox(chalk.red('No response'));
         }
