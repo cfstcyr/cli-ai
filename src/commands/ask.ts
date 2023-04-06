@@ -27,8 +27,7 @@ export const ask = async (prompt: string) => {
         spinner.stop();
 
         if (response) {
-            console.log(chalk.bold('Prompt:') + ' ' + prompt);
-            console.log(chalk.bold.green('Response:') + ' ' + response);
+            console.log(response);
         } else {
             autoBox(chalk.red('No response'));
         }
