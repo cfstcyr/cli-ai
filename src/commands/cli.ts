@@ -39,7 +39,6 @@ export const cli = async (prompt: string) => {
         spinner.stop();
 
         if (response) {
-            console.log(chalk.bold('Prompt:') + ' ' + prompt + '\n');
             autoBox(chalk.yellow.bold(response));
             console.log();
 
