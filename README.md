@@ -16,6 +16,12 @@ This mode generates a CLI command from a prompt. You can then run this command o
 
 ![Generate CLI command](./assets/example2.png)
 
+### Conversational
+
+Start a chat conversation with ChatGPT.
+
+![Conversational](./assets/example3.png)
+
 ## Installation
 
 ### Manual
