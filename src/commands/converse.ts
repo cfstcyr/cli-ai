@@ -1,13 +1,12 @@
 import chalk from 'chalk';
-import promptSync from 'prompt-sync';
 import { getOpenai } from '../utils/openai';
 import { ChatCompletionRequestMessage } from 'openai';
 import ora from 'ora';
 import { config } from '../utils/config';
 import { CONFIG_KEYS } from '../constants/config';
+import inquirer from 'inquirer';
 
 export const converse = async () => {
-    const prompt = promptSync({});
     const openai = getOpenai();
 
     if (!openai) return;
@@ -16,7 +15,12 @@ export const converse = async () => {
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
-        const content = prompt(chalk.gray('(') + chalk.bold('you') + chalk.gray(')') + ' ');
+        const { content } = await inquirer.prompt([
+            {
+                name: 'content',
+                message: 'you',
+            },
+        ]);
 
         if (!content) return;
 
@@ -39,15 +43,9 @@ export const converse = async () => {
 
         if (response) {
             history.push({ role: 'assistant', content: response });
-            console.log(chalk.gray('(') + chalk.green('bot') + chalk.gray(')') + ' ' + response);
+            console.log('  ' + chalk.bold.green('bot') + ' ' + response);
         } else {
-            console.log(
-                chalk.gray('(') +
-                    chalk.green('bot') +
-                    chalk.gray(')') +
-                    ' ' +
-                    chalk.italic('No response'),
-            );
+            console.log('  ' + chalk.bold.green('bot') + ' ' + chalk.italic('No response'));
         }
     }
 };

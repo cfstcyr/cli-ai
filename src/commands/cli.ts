@@ -3,10 +3,10 @@ import { autoBox } from '../utils/box';
 import { getOpenai } from '../utils/openai';
 import { CANCEL, COPY_TO_CLIPBOARD, RUN_COMMAND } from '../constants/cli';
 import ora from 'ora';
-import { OpenMenu } from '../utils/menu';
 import { copy } from '../utils/clipboard';
 import { exec } from '../utils/exec';
 import { config } from '../utils/config';
+import inquirer from 'inquirer';
 
 export const cli = async (prompt: string) => {
     const openai = getOpenai();
@@ -21,7 +21,12 @@ export const cli = async (prompt: string) => {
                 model: 'gpt-3.5-turbo',
                 messages: [
                     { role: 'system', content: 'You are a CLI command generator' },
-                    { role: 'user', content: `Imagine you are ${config.get('system') ?? 'macos'} terminal commands selector. I will describe task and you will respond only using linux command, without description, without explanation, without quotation.: """${prompt}"""` }
+                    {
+                        role: 'user',
+                        content: `Imagine you are ${
+                            config.get('system') ?? 'macos'
+                        } terminal commands selector. I will describe task and you will respond only using linux command, without description, without explanation, without quotation.: """${prompt}"""`,
+                    },
                 ],
                 temperature: 0,
                 max_tokens: 100,
@@ -38,17 +43,21 @@ export const cli = async (prompt: string) => {
             autoBox(chalk.yellow.bold(response));
             console.log();
 
-            OpenMenu([RUN_COMMAND, COPY_TO_CLIPBOARD, CANCEL], (item) => {
-                switch (item) {
-                    case RUN_COMMAND:
-                        console.log(chalk.green('Executing command...') + '\n');
-                        exec(response);
-                        break;
-                    case COPY_TO_CLIPBOARD:
-                        copy(response);
-                        break;
-                }
+            const { action } = await inquirer.prompt({
+                name: 'action',
+                message: 'Actions',
+                choices: [RUN_COMMAND, COPY_TO_CLIPBOARD, CANCEL],
+                type: 'list',
             });
+
+            switch (action) {
+                case RUN_COMMAND:
+                    exec(response);
+                    break;
+                case COPY_TO_CLIPBOARD:
+                    copy(response);
+                    break;
+            }
         } else {
             autoBox(chalk.red('No command'));
         }
