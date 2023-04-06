@@ -5,4 +5,5 @@ export const CONFIG_KEYS = {
     apiKey: 'api-key',
     system: 'system',
     chatHistory: 'chat-history',
+    maxToken: 'max-token',
 };
