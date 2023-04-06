@@ -1,6 +1,6 @@
 # cli-ai
 
-CLI application that uses OpenAI ChatGPT to answer to prompts
+This CLI app utilizes chatgpt to interpret natural language queries, enabling users to converse, ask questions and generate CLI commands easily and efficiently.
 
 ## Usage
 
@@ -12,7 +12,11 @@ This mode allows you to ask a question.
 
 ### Generate CLI command
 
-This mode generates a CLI command from a prompt. You can then run this command or copy it to the clipboard.
+The feature to simply ask a question allows users to type or speak a question in natural language, and the CLI app will use the chatgpt language model to interpret the query and generate a CLI command.
+
+For example, a user can ask "How do I create a new file?" and the CLI app will generate the appropriate command to create a new file, such as "touch filename".
+
+You can then run it or copy it to your clipboard.
 
 ![Generate CLI command](./assets/example2.png)
 
