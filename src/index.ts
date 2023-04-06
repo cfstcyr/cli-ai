@@ -6,14 +6,19 @@ import { ask } from './commands/ask';
 import { cli } from './commands/cli';
 import { CONFIG_KEYS } from './constants/config';
 import { del, get, set } from './commands/config';
+import { converse } from './commands/converse';
 
 yargs(hideBin(process.argv))
     .command({
-        command: 'ask <prompt>',
+        command: 'ask [prompt]',
         describe: 'Ask AI',
         aliases: ['a'],
         handler: (argv) => {
-            ask(argv.prompt + ' ' + argv._.slice(1).join(' '));
+            if (argv.prompt) {
+                ask(argv.prompt + ' ' + argv._.slice(1).join(' '));
+            } else {
+                converse();
+            }
         },
     })
     .command({
