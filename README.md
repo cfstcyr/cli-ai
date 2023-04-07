@@ -26,6 +26,16 @@ Start a chat conversation with ChatGPT.
 
 ![Conversational](./assets/example3.png)
 
+### SQL Generator
+
+Generate SQL queries from natural language. It displays properly in the terminal and you can copy it to you clipboard.
+
+![SQL Generator](./assets/example4.png)
+
+You can also specify a modification to make for the query.
+
+![SQL Generator modification](./assets/example5.png)
+
 ## Installation
 
 ### Manual
