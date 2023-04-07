@@ -7,17 +7,18 @@ import { cli } from './commands/cli';
 import { CONFIG_KEYS } from './constants/config';
 import { del, get, set } from './commands/config';
 import { converse } from './commands/converse';
+import { sql } from './commands/sql';
 
 yargs(hideBin(process.argv))
     .command({
         command: 'ask [prompt]',
         describe: 'Ask AI',
         aliases: ['a'],
-        handler: (argv) => {
+        handler: async (argv) => {
             if (argv.prompt) {
-                ask(argv.prompt + ' ' + argv._.slice(1).join(' '));
+                await ask(argv.prompt + ' ' + argv._.slice(1).join(' '));
             } else {
-                converse();
+                await converse();
             }
         },
     })
@@ -25,8 +26,16 @@ yargs(hideBin(process.argv))
         command: 'cli <prompt>',
         describe: 'Generate a CLI command',
         aliases: ['c'],
-        handler: (argv) => {
-            cli(argv.prompt + ' ' + argv._.slice(1).join(' '));
+        handler: async (argv) => {
+            await cli(argv.prompt + ' ' + argv._.slice(1).join(' '));
+        },
+    })
+    .command({
+        command: 'sql <prompt>',
+        describe: 'Generate a SQL query',
+        aliases: ['s'],
+        handler: async (argv) => {
+            await sql(argv.prompt + ' ' + argv._.slice(1).join(' '));
         },
     })
     .command({

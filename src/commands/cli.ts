@@ -7,6 +7,7 @@ import { copy } from '../utils/clipboard';
 import { exec } from '../utils/exec';
 import { config } from '../utils/config';
 import inquirer from 'inquirer';
+import { CONFIG_KEYS } from "../constants/config";
 
 export const cli = async (prompt: string) => {
     const openai = getOpenai();
@@ -29,7 +30,7 @@ export const cli = async (prompt: string) => {
                     },
                 ],
                 temperature: 0,
-                max_tokens: 100,
+                max_tokens: config.get(CONFIG_KEYS.maxToken) ?? 100,
                 top_p: 1.0,
                 frequency_penalty: 0.2,
                 presence_penalty: 0.0,
