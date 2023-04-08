@@ -5,6 +5,7 @@ import ora from 'ora';
 import { config } from '../utils/config';
 import { CONFIG_KEYS } from '../constants/config';
 import inquirer from 'inquirer';
+import wrap from 'word-wrap';
 
 export const converse = async () => {
     const openai = getOpenai();
@@ -43,7 +44,14 @@ export const converse = async () => {
 
         if (response) {
             history.push({ role: 'assistant', content: response });
-            console.log('  ' + chalk.bold.green('bot') + ' ' + response);
+            console.log(
+                wrap(chalk.bold.green('bot') + ' ' + response, {
+                    width: process.stdout.columns - 5,
+                    indent: '  ',
+                    newline: '\n      ',
+                    trim: true,
+                }),
+            );
         } else {
             console.log('  ' + chalk.bold.green('bot') + ' ' + chalk.italic('No response'));
         }
