@@ -55,15 +55,20 @@ export const sql = async (prompt: string) => {
             if (response) {
                 messages.push({ role: 'system', content: response });
 
-                autoBox(
-                    '\xa0' +
-                        highlight(format(response, { language: 'sql' }), { language: 'sql' })
-                            .split(' ')
-                            .join('\xa0')
-                            .split('\n')
-                            .join('\n\xa0'),
-                    { textAlign: 'left' },
-                );
+                try {
+                    autoBox(
+                        '\xa0' +
+                            highlight(format(response, { language: 'sql' }), { language: 'sql' })
+                                .split(' ')
+                                .join('\xa0')
+                                .split('\n')
+                                .join('\n\xa0'),
+                        { textAlign: 'left' },
+                    );
+                } catch {
+                    console.log(chalk.gray.italic('Unable to format SQL query'));
+                    autoBox(chalk.yellow(response));
+                }
                 console.log();
 
                 const { action } = await inquirer.prompt({
