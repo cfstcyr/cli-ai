@@ -2,15 +2,12 @@ import { getOpenai } from '../utils/openai';
 import ora from 'ora';
 import { config } from '../utils/config';
 import { CONFIG_KEYS } from '../constants/config';
-// import wrap from 'word-wrap';
-import { marked } from 'marked';
 import { autoBox } from '../utils/box';
 import chalk from 'chalk';
 import { CANCEL, COPY_TO_CLIPBOARD, PRECISE_COMMAND } from '../constants/cli';
 import inquirer from 'inquirer';
 import { copy } from '../utils/clipboard';
 import { ChatCompletionRequestMessage } from 'openai';
-import TerminalRenderer from 'marked-terminal';
 import highlight from 'cli-highlight';
 import { format } from 'sql-formatter';
 
@@ -18,10 +15,6 @@ export const sql = async (prompt: string) => {
     const openai = getOpenai();
 
     if (!openai) return;
-
-    marked.setOptions({
-        renderer: new TerminalRenderer(),
-    });
 
     const messages: ChatCompletionRequestMessage[] = [
         { role: 'system', content: 'You are a SQL command generator' },
