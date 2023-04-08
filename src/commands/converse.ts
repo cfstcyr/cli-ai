@@ -3,7 +3,6 @@ import { getOpenai } from '../utils/openai';
 import { ChatCompletionRequestMessage } from 'openai';
 import ora from 'ora';
 import { config } from '../utils/config';
-import { CONFIG_KEYS } from '../constants/config';
 import inquirer from 'inquirer';
 
 export const converse = async () => {
@@ -33,7 +32,7 @@ export const converse = async () => {
                 model: 'gpt-3.5-turbo',
                 messages: [
                     { role: 'system', content: 'You are an helpful assistant' },
-                    ...history.slice(-1 * Number(config.get(CONFIG_KEYS.chatHistory) ?? 3)),
+                    ...history.slice(-1 * Number(config.get('chat-history') ?? 3)),
                 ],
                 max_tokens: 100,
             })

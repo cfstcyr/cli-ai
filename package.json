@@ -37,6 +37,7 @@
     "typescript": "^5.0.3"
   },
   "dependencies": {
+    "@cfstcyr/ts-saved-config": "file:../ts-saved-config",
     "@types/marked": "^4.0.8",
     "@types/marked-terminal": "^3.1.3",
     "chalk": "^4.1.2",
