@@ -69,7 +69,6 @@ export const sql = async (prompt: string) => {
                     console.log(chalk.gray.italic('Unable to format SQL query'));
                     autoBox(chalk.yellow(response));
                 }
-                console.log();
 
                 const { action } = await inquirer.prompt({
                     name: 'action',
