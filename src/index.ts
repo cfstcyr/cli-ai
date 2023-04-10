@@ -4,10 +4,10 @@ import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
 import { ask } from './commands/ask';
 import { cli } from './commands/cli';
-import { CONFIG_KEYS } from './constants/config';
 import { del, get, set } from './commands/config';
 import { converse } from './commands/converse';
 import { sql } from './commands/sql';
+import { config } from './utils/config';
 
 yargs(hideBin(process.argv))
     .command({
@@ -49,7 +49,7 @@ yargs(hideBin(process.argv))
                     (yargs) =>
                         yargs
                             .positional('key', {
-                                choices: Object.values(CONFIG_KEYS),
+                                choices: config.keys(),
                             })
                             .positional('value', {
                                 type: 'string',
@@ -65,7 +65,7 @@ yargs(hideBin(process.argv))
                     (yargs) =>
                         yargs
                             .positional('key', {
-                                choices: Object.values(CONFIG_KEYS),
+                                choices: config.keys(),
                             })
                             .demandOption('key'),
                     (argv) => {
@@ -78,7 +78,7 @@ yargs(hideBin(process.argv))
                     (yargs) =>
                         yargs
                             .positional('key', {
-                                choices: Object.values(CONFIG_KEYS),
+                                choices: config.keys(),
                             })
                             .demandOption('key'),
                     (argv) => {

@@ -3,7 +3,6 @@ import { autoBox } from '../utils/box';
 import { getOpenai } from '../utils/openai';
 import ora from 'ora';
 import { config } from '../utils/config';
-import { CONFIG_KEYS } from '../constants/config';
 import wrap from 'word-wrap';
 
 export const ask = async (prompt: string) => {
@@ -21,7 +20,7 @@ export const ask = async (prompt: string) => {
                     { role: 'system', content: 'You are an helpful assistant' },
                     { role: 'user', content: prompt },
                 ],
-                max_tokens: config.get(CONFIG_KEYS.maxToken) ?? 100,
+                max_tokens: config.get('max-token') ?? 100,
             })
         ).data.choices[0]?.message?.content.trim();
 

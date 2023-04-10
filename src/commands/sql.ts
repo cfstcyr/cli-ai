@@ -1,7 +1,6 @@
 import { getOpenai } from '../utils/openai';
 import ora from 'ora';
 import { config } from '../utils/config';
-import { CONFIG_KEYS } from '../constants/config';
 import { autoBox } from '../utils/box';
 import chalk from 'chalk';
 import { CANCEL, COPY_TO_CLIPBOARD, PRECISE_COMMAND } from '../constants/cli';
@@ -36,7 +35,7 @@ export const sql = async (prompt: string) => {
                     model: 'gpt-3.5-turbo',
                     messages,
                     temperature: 0,
-                    max_tokens: config.get(CONFIG_KEYS.maxToken) ?? 100,
+                    max_tokens: config.get('max-token') ?? 100,
                     top_p: 1.0,
                     frequency_penalty: 0.2,
                     presence_penalty: 0.0,
